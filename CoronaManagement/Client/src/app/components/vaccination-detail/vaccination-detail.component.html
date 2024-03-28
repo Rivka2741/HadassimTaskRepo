@@ -1,0 +1,10 @@
+<div>
+    <ul class="user-list">
+      <li *ngFor="let vaccinationdetail of VaccinationDetail" class="user-item">
+        <p><strong>VaccinationId: </strong> {{ vaccinationdetail.vaccinationId }}</p>
+        <p><strong>UserId: </strong> {{ vaccinationdetail.userId }}</p>
+        <p><strong>VaccineDate: </strong> {{ vaccinationdetail.vaccineDate | date }}</p>
+        <p><strong>VaccineManufacturerId: </strong> {{ vaccinationdetail.vaccineManufacturerId }}</p>
+      </li>
+    </ul>
+  </div>

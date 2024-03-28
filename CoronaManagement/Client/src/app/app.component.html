@@ -1,0 +1,16 @@
+<div>
+    <button [class.active]="activeTab === 'users'" (click)="activeTab = 'users'">Users</button>
+    <button [class.active]="activeTab === 'sickWithCorona'" (click)="activeTab = 'sickWithCorona'">Sick with Corona</button>
+    <button [class.active]="activeTab === 'vaccinationDetail'" (click)="activeTab = 'vaccinationDetail'">Vaccination Detail</button>
+    <button [class.active]="activeTab === 'activePatientsCount'" (click)="activeTab = 'activePatientsCount'">activePatientsCount</button>
+  </div>
+  
+  <div class="tab-content">
+    <app-users *ngIf="activeTab === 'users'"></app-users>
+  
+    <app-sick-with-corona *ngIf="activeTab === 'sickWithCorona'"></app-sick-with-corona>
+
+    <app-vaccination-detail *ngIf="activeTab === 'vaccinationDetail'"></app-vaccination-detail>
+
+    <app-patient-activity-graph *ngIf="activeTab === 'activePatientsCount'"></app-patient-activity-graph>
+ </div>

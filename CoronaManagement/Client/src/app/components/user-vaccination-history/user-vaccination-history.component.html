@@ -1,0 +1,10 @@
+<div class="user-vaccination-card">
+    <h2>Vaccination Records</h2>
+    <div *ngFor="let vaccination of vaccinations" class="vaccination-record">
+      <p><strong>Vaccination ID:</strong> {{ vaccination.vaccinationId }}</p>
+      <p><strong>User ID:</strong> {{ vaccination.userId }}</p>
+      <p><strong>Vaccine Date:</strong> {{ vaccination.vaccineDate }}</p>
+      <p><strong>Vaccine Manufacturer ID:</strong> {{ vaccination.vaccineManufacturerId }}</p>
+    </div>
+    <button (click)="closeModal()">Close</button>
+  </div>

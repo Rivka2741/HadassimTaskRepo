@@ -1,0 +1,15 @@
+<!-- <p>sick-with-corona works!</p> -->
+<!-- <div>{{ SickWithCorona | json }}</div> -->
+<!-- <button id ="t" (click)="change()" (click)="getSickWithCorona()">Show All SickWithCorona</button> -->
+<div>
+    <ul class="user-list">
+      <li *ngFor="let sickwithcorona of SickWithCorona" class="user-item">
+        <p><strong>SickId: </strong> {{ sickwithcorona.sickId }}</p>
+        <p><strong>UserId: </strong> {{ sickwithcorona.userId }}</p>
+        <p><strong>positiveResultDate: </strong> {{ sickwithcorona.positiveResultDate | date }}</p>
+        <p><strong>recoveryDate: </strong> {{ sickwithcorona.recoveryDate | date }}</p>
+        <!-- <input type="button" value="edit" (click)="editUser(user) "/> -->
+        <input type="button" value="remove" (click)="removeSickWithCorona(sickwithcorona)"/>
+      </li>
+    </ul>
+  </div>

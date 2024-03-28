@@ -1,0 +1,60 @@
+/* Styling for the table */
+.user-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.user-table th, .user-table td {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+/* Styling for table header */
+.user-table th {
+  background-color: #f2f2f2;
+}
+
+/* Styling for upload button */
+.upload-container {
+  display: flex;
+  align-items: center;
+}
+
+.upload-button {
+  background-color: #007bff;
+  color: #fff;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.upload-button input[type="file"] {
+  display: none;
+}
+
+/* Styling for buttons */
+input[type="button"] {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+input[type="button"]:hover {
+  background-color: #0056b3;
+}
+
+.user-photo-container {
+  width: 100px; /* Adjust the width as needed */
+  height: 100px; /* Adjust the height as needed */
+  overflow: hidden;
+}
+
+.user-photo {
+  width: 100%; /* Ensure the image fills the container */
+  height: 100%; /* Ensure the image fills the container */
+  object-fit: cover; /* Maintain aspect ratio and cover the container */
+}

@@ -1,0 +1,135 @@
+
+<div class="container">
+  <button id="showAllBtn" (click)="change(); getUser()">Show All Users</button>
+  <button id="addUserBtn" (click)="changeAdd()">Add User</button>
+  <button id="getUserByIdBtn" (click)="changeGetUserById()">Get User By Id</button>
+
+  <div *ngIf="show">
+    <table class="user-table">
+      <!-- Table header -->
+      <thead>
+        <tr>
+          <th>Upload</th>
+          <th>First Name</th>
+          <th>Last Name</th>
+          <th>Identity</th>
+          <th>City</th>
+          <th>Street</th>
+          <th>Street Number</th>
+          <th>Date of Birth</th>
+          <th>Phone</th>
+          <th>Cell Phone</th>
+          <th>Corona Date</th>
+          <th>Vaccination</th>
+          <th>Edit</th>
+          <th>Remove</th>
+        </tr>
+      </thead>
+      <!-- Table body -->
+      <tbody>
+        <tr *ngFor="let user of Users" class="user-item">
+          <!-- Upload cell with photo display -->
+          <td class="upload-cell">
+            <div class="upload-container">
+              <label class="upload-button">
+                <input type="file" (change)="onFileSelected($event, user)" accept="image/*">
+              </label>
+            </div>
+            <div class="user-photo-container">
+              <img *ngIf="user.photo" [src]="user.photo" alt="User Photo" class="user-photo">
+            </div>
+          </td>
+          <!-- User details columns -->
+          <td>{{ user.firstName }}</td>
+          <td>{{ user.lastName }}</td>
+          <td>{{ user.identityCard }}</td>
+          <td>{{ user.city }}</td>
+          <td>{{ user.street }}</td>
+          <td>{{ user.number }}</td>
+          <td>{{ user.dateOfBirth | date }}</td>
+          <td>{{ user.phone }}</td>
+          <td>{{ user.cellPhone }}</td>
+          <td><input type="button" value="Corona Date" (click)="getCoronaDate(user)"/></td>
+          <td><input type="button" value="Vaccination" (click)="userVaccination(user)"/></td>
+          <td><input type="button" value="Edit" (click)="editUser(user)"/></td>
+          <td><input type="button" value="Remove" (click)="removeUser(user)"/></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+<!-- ------------------------------------ -->
+<div *ngIf="add">
+    <form (submit)="onSubmit()">
+      <div>
+        <label for="firstName"> First Name:</label>
+        <input type="string" id="firstName" name="firstName" [(ngModel)]="user.firstName" required>
+      </div>
+      <div>
+        <label for="lastName">Last Name:</label>
+        <input type="string" id="lastName" name="lastName" [(ngModel)]="user.lastName" required>
+      </div>
+      <div>
+        <label for="identityCard">Identity:</label>
+        <input type="string" id="identityCard" name="identityCard" [(ngModel)]="user.identityCard" required>
+      </div>
+      <div>
+        <label for="city">city:</label>
+        <input type="string" id="city" name="city" [(ngModel)]="user.city " required>
+      </div>
+      <div>
+          <label for="street">Street:</label>
+          <input type="string" id="street" name="street" [(ngModel)]="user.street" required>
+        </div>
+        <div>
+          <label for="number">Number:</label>
+          <input type="string" id="number" name="Number" [(ngModel)]="user.number" required>
+        </div>
+        <div>
+          <label for="dateOfBirth">DateOfBirth:</label>
+          <input type="string" id="dateOfBirth" name="dateOfBirth" [(ngModel)]="user.dateOfBirth" required>
+        </div>
+        <div>
+          <label for="phone">Phone:</label>
+          <input type="string" id="phone" name="phone" [(ngModel)]="user.phone" required>
+        </div>
+        <div>
+          <label for="cellPhone">CellPhone:</label>
+          <input type="string" id="cellPhone" name="cellPhone" [(ngModel)]="user.cellPhone" required>
+        </div>
+        <div>
+          <label for="photo">Photo:</label>
+          <input type="Uint8Array" id="photo" name="photo" [(ngModel)]="user.photo" required>
+        </div>
+      <button id="t" type="submit" (click)="addUser()">Add</button>
+    </form>
+</div>
+  
+<!-- ------------------------------------------------- -->
+<div *ngIf="showUserById">
+  <form (submit)="getUserById()">
+      <input type="string" id="userIdInput" [(ngModel)]="userById" name="userId">
+      <button id="t" type="submit">Submit</button>
+  </form>
+  <div *ngIf="selectedUser">
+    <ul class="user-list">
+      <li>
+        <p><strong>First Name:</strong> {{ selectedUser.firstName }}</p>
+        <p><strong>Last Name:</strong> {{ selectedUser.lastName }}</p>
+        <p><strong>Identity:</strong> {{ selectedUser.identityCard }}</p>
+        <p><strong>City:</strong> {{ selectedUser.city }}</p>
+        <p><strong>Street:</strong> {{ selectedUser.street }}</p>
+        <p><strong>Street Number:</strong> {{ selectedUser.number }}</p>
+        <p><strong>Date of Birth:</strong> {{ selectedUser.dateOfBirth | date }}</p>
+        <p><strong>Phone:</strong> {{ selectedUser.phone }}</p>
+        <p><strong>Cell Phone:</strong> {{ selectedUser.cellPhone }}</p>
+        <input type="button" value="edit" (click)="editUser(selectedUser) "/>
+        <input type="button" value="remove" (click)="removeUser(selectedUser)"/>
+      </li>
+    </ul>
+  </div>
+</div>
+
+
+<div>
+ 

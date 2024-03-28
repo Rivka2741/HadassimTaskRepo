@@ -1,0 +1,10 @@
+<div>
+    <h3>Vaccination Statistics</h3>
+    <p>Number of People Never Vaccinated: {{ numNeverVaccinated }}</p>
+</div>
+<div>
+    <h3>Active Patients Count for Each Day in Last Month</h3>
+    <div *ngFor="let count of activePatientsCountDay; let i = index">
+      Day {{ i + 1 }}: {{ count }} active patients
+    </div>
+  </div>
