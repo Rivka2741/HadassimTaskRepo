@@ -2,11 +2,13 @@ using AutoMapper;
 using Bll;
 using Dal;
 using Entity;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.Identity.Client;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -45,3 +47,18 @@ app.UseAuthorization();
 app.MapControllers();
 
 app.Run();
+
+// Inside ConfigureServices method in Startup.cs
+builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+    .AddCookie(options =>
+    {
+ 
+    });
+
+builder.Services.AddAuthorization();
+
+builder.Services.AddAuthorization();
+
+// Inside Configure method in Startup.cs
+app.UseAuthentication();
+app.UseAuthorization();

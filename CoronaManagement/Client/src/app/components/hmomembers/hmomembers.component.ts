@@ -5,15 +5,14 @@ import{ SickwithcoronaService } from '../../services/sickwithcorona-service/sick
 import { SickWithCorona } from 'src/models/SickWithCorona'; 
 import{ VaccinationdetailService } from '../../services/vaccinationdetail-service/vaccinationdetail.service'
 import { VaccinationDetail } from 'src/models/VaccinationDetail'; 
-import { MyCoronaDateComponent } from '../my-corona-date/my-corona-date.component'; 
+import { MyCoronaDateComponent } from '../my-corona-date/my-corona-date.component';
 
 @Component({
-  selector: 'app-users',
-  templateUrl: './users.component.html',
-  styleUrls: ['./users.component.css']
+  selector: 'app-hmomembers',
+  templateUrl: './hmomembers.component.html',
+  styleUrls: ['./hmomembers.component.css']
 })
-
-export class UsersComponent implements OnInit{
+export class HMOMembersComponent implements OnInit {
   constructor(public usersService: UsersService, public sickWithCoronaService: SickwithcoronaService, public VaccinationdetailService: VaccinationdetailService ) { }
   
   @Output() 

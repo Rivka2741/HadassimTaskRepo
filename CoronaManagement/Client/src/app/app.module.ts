@@ -3,7 +3,6 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { UsersComponent } from './components/users/users.component';
 import { SickWithCoronaComponent } from './components/sick-with-corona/sick-with-corona.component';
 import { VaccinationDetailComponent } from './components/vaccination-detail/vaccination-detail.component';
 import { VaccineManufacturerComponent } from './components/vaccine-manufacturer/vaccine-manufacturer.component';
@@ -21,17 +20,18 @@ import { FormsModule } from '@angular/forms';
 import { MyCoronaDateComponent } from './components/my-corona-date/my-corona-date.component';
 import { UserVaccinationHistoryComponent } from './components/user-vaccination-history/user-vaccination-history.component';
 import { PatientActivityGraphComponent } from './components/patient-activity-graph/patient-activity-graph.component';
+import { HMOMembersComponent } from './components/hmomembers/hmomembers.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    UsersComponent,
     SickWithCoronaComponent,
     VaccinationDetailComponent,
     VaccineManufacturerComponent,
     MyCoronaDateComponent,
     UserVaccinationHistoryComponent,
-    PatientActivityGraphComponent
+    PatientActivityGraphComponent,
+    HMOMembersComponent
   ],
   imports: [
     HttpClientModule,

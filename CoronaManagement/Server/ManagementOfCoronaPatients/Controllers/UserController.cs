@@ -31,7 +31,7 @@ namespace ManagementOfCoronaPatients.Controllers
             return userBll.GetUserById(identityCard);
         }
 
-        [Authorize]
+        
         [HttpPut]
         public void put([FromBody] UserTblDto user)
         {
