@@ -16,3 +16,4 @@ namespace Bll
         public void UploadUserPhoto(string UserId, byte[] PhotoData);
     }
 }
+

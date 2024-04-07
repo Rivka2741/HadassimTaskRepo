@@ -1,9 +1,10 @@
 
 <div class="container">
-    <button id="showAllBtn" (click)="change(); getUser()">Show All Users</button>
-    <button id="addUserBtn" (click)="changeAdd()">Add User</button>
-    <button id="getUserByIdBtn" (click)="changeGetUserById()">Get User By Id</button>
-  
+  <!-- <div> -->
+    <button id="showAllBtn" (click)="change(); getUser()" class="button_main">Show All Users</button>
+    <button id="addUserBtn" (click)="changeAdd()" class="button_main">Add User</button>
+    <button id="getUserByIdBtn" (click)="changeGetUserById()" class="button_main">Get User By Id</button>
+  </div>
     <div *ngIf="show">
       <table class="user-table">
         <!-- Table header -->
@@ -113,18 +114,62 @@
   
   <!-- ------------------------------------ -->
   <div *ngIf="add">
-      <form (submit)="onSubmit()">
+      <form (submit)="onSubmit()" #userForm="ngForm">
         <div>
-          <label for="firstName"> First Name:</label>
-          <input type="string" id="firstName" name="firstName" [(ngModel)]="user.firstName" required>
+          <label for="firstName">First Name:</label>
+          <input 
+            type="text" 
+            id="firstName" 
+            name="firstName" 
+            [(ngModel)]="user.firstName" 
+            #firstNameInput="ngModel" 
+            required 
+            minlength="2" 
+            maxlength="50"
+            pattern="[a-zA-Z ]*" 
+          >
+          <div *ngIf="firstNameInput.invalid && (firstNameInput.dirty || firstNameInput.touched)" class="error-message">
+            <div *ngIf="firstNameInput.errors?.['required']" class="Input_normal_errors">First Name is required.</div>
+            <div *ngIf="firstNameInput.errors?.['minlength']" class="Input_normal_errors">First Name must be at least 2 characters long.</div>
+            <div *ngIf="firstNameInput.errors?.['maxlength']" class="Input_normal_errors">First Name cannot be more than 50 characters long.</div>
+            <div *ngIf="firstNameInput.errors?.['pattern']" class="Input_normal_errors">First Name can only contain alphabets and spaces.</div>
+          </div>
         </div>
         <div>
           <label for="lastName">Last Name:</label>
-          <input type="string" id="lastName" name="lastName" [(ngModel)]="user.lastName" required>
+          <input 
+            type="text" 
+            id="lastName" 
+            name="lastName" 
+            [(ngModel)]="user.lastName" 
+            #lastNameInput="ngModel" 
+            required 
+            minlength="2" 
+            maxlength="50"
+            pattern="[a-zA-Z ]*" 
+          >
+          <div *ngIf="lastNameInput.invalid && (lastNameInput.dirty || lastNameInput.touched)" class="error-message">
+            <div *ngIf="lastNameInput.errors?.['required']" class="Input_normal_errors">Last Name is required.</div>
+            <div *ngIf="lastNameInput.errors?.['minlength']" class="Input_normal_errors">Last Name must be at least 2 characters long.</div>
+            <div *ngIf="lastNameInput.errors?.['maxlength']" class="Input_normal_errors">Last Name cannot be more than 50 characters long.</div>
+            <div *ngIf="lastNameInput.errors?.['pattern']" class="Input_normal_errors">Last Name can only contain alphabets and spaces.</div>
+          </div>
         </div>
         <div>
           <label for="identityCard">Identity:</label>
-          <input type="string" id="identityCard" name="identityCard" [(ngModel)]="user.identityCard" required>
+          <input 
+          type="text" 
+          id="identityCard" 
+          name="identityCard" 
+          [(ngModel)]="user.identityCard" 
+          #identityCardInput="ngModel" 
+          required 
+          pattern="[A-Za-z0-9]{8,9}"
+          >
+          <div *ngIf="identityCardInput.invalid && (identityCardInput.dirty || identityCardInput.touched)" class="error-message">
+            <div *ngIf="identityCardInput.errors?.['required']" class="Input_normal_errors">Identity Card is required.</div>
+            <div *ngIf="identityCardInput.errors?.['pattern']" class="Input_normal_errors">Please enter a valid identity card format (8-9 alphanumeric characters).</div>
+          </div>
         </div>
         <div>
           <label for="city">city:</label>
@@ -135,7 +180,7 @@
             <input type="string" id="street" name="street" [(ngModel)]="user.street" required>
           </div>
           <div>
-            <label for="number">Number:</label>
+            <label for="number">Number Of Street:</label>
             <input type="string" id="number" name="Number" [(ngModel)]="user.number" required>
           </div>
           <div>
@@ -154,7 +199,7 @@
             <label for="photo">Photo:</label>
             <input type="Uint8Array" id="photo" name="photo" [(ngModel)]="user.photo" required>
           </div>
-        <button id="t" type="submit" (click)="addUser()">Add</button>
+        <button id="t" type="submit" [disabled]="userForm.invalid" (click)="addUser()">Add</button>
       </form>
   </div>
     

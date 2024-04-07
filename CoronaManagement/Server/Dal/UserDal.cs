@@ -1,12 +1,11 @@
-﻿
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.ConstrainedExecution;
 using System.Text;
 using System.Threading.Tasks;
 using Entity;
-
+ 
 
 namespace Dal
 {
@@ -32,8 +31,12 @@ namespace Dal
                 this._context.VaccinationDetails.Remove(userVaccination);
             }
 
-            var userCoronaDate = this._context.SickWithCoronas.First(x => x.UserId == id);
-            this._context.SickWithCoronas.Remove(userCoronaDate);
+            var userCoronaDate = this._context.SickWithCoronas.FirstOrDefault(x => x.UserId == id);
+            if (userCoronaDate!=null)
+            {
+                this._context.SickWithCoronas.Remove(userCoronaDate);
+            }
+            
 
             var userToDelet = this._context.Users.First(x => x.UserId == id);
             this._context.Users.Remove(userToDelet);
@@ -49,7 +52,7 @@ namespace Dal
 
         public UserTbl GetUserById(string id)
         {
-            return this._context.Users.First(x => x.IdentityCard == id);
+             return this._context.Users.First(x => x.IdentityCard == id);
         }
 
         

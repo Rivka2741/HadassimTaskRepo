@@ -17,4 +17,4 @@ export class AppComponent {
   oncustAdded(user: Users) {
     this.User.push(user);
   }
-}
+}  

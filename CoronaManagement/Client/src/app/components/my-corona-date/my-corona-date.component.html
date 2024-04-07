@@ -1,11 +1,17 @@
 <div class="modal">
     <div class="modal-content">
-      <h2>Corona Date</h2>
-      <p><strong>Sick ID:</strong> {{ coronaDate.sickId }}</p>
-      <p><strong>User ID:</strong> {{ coronaDate.userId }}</p>
-      <p><strong>Positive Result Date:</strong> {{ coronaDate.positiveResultDate }}</p>
-      <p><strong>Recovery Date:</strong> {{ coronaDate.recoveryDate }}</p>
+      <h2 class="main_word">Corona Date</h2>
+      <!-- <div *ngFor="let coronadate of coronaDate" class="coronaDate"> -->
+      <p class="word"><strong>Sick ID:</strong> {{ coronaDate.sickId }}</p>
+      <p class="word"><strong>User ID:</strong> {{ coronaDate.userId }}</p>
+      <p class="word"><strong>Positive Result Date:</strong> {{ coronaDate.positiveResultDate }}</p>
+      <p class="word"><strong>Recovery Date:</strong> {{ coronaDate.recoveryDate }}</p>
+      <!-- </div> -->
     </div>
-    <button (click)="closeModal()">Close</button>
+    <div mat-dialog-actions>
+      <button mat-button (click)="closeDialog()">Close</button>
+    </div>
+  
+
 </div>
 

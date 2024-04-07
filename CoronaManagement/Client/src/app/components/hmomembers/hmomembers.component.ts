@@ -1,11 +1,15 @@
-import { Component, OnInit , Input , Output, EventEmitter} from '@angular/core';
+import { Component, OnInit , Input , Output, EventEmitter , ViewChild} from '@angular/core';
 import{ UsersService } from '../../services/users-service/users.service'
 import { Users } from 'src/models/Users';
 import{ SickwithcoronaService } from '../../services/sickwithcorona-service/sickwithcorona.service'
 import { SickWithCorona } from 'src/models/SickWithCorona'; 
 import{ VaccinationdetailService } from '../../services/vaccinationdetail-service/vaccinationdetail.service'
 import { VaccinationDetail } from 'src/models/VaccinationDetail'; 
+import { MatDialog } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { MyCoronaDateComponent } from '../my-corona-date/my-corona-date.component';
+import {UserVaccinationHistoryComponent} from '../user-vaccination-history/user-vaccination-history.component'
+import { NgForm } from '@angular/forms'; // Import NgForm for form references
 
 @Component({
   selector: 'app-hmomembers',
@@ -13,11 +17,12 @@ import { MyCoronaDateComponent } from '../my-corona-date/my-corona-date.componen
   styleUrls: ['./hmomembers.component.css']
 })
 export class HMOMembersComponent implements OnInit {
-  constructor(public usersService: UsersService, public sickWithCoronaService: SickwithcoronaService, public VaccinationdetailService: VaccinationdetailService ) { }
-  
+  constructor(public usersService: UsersService, public sickWithCoronaService: SickwithcoronaService, public VaccinationdetailService: VaccinationdetailService,private dialog: MatDialog ) { }
+ 
   @Output() 
   @Input()
   Users: Users[] = [];
+  
   custAdded = new EventEmitter<Users>();
 
   ngOnInit(){
@@ -31,7 +36,7 @@ export class HMOMembersComponent implements OnInit {
     this.user = {userId:0,firstName:'', lastName: '',identityCard:'',city:'',street:'',
                  number:'',dateOfBirth:new Date(),phone:'',cellPhone:'',photo:null,sickWithCoronas:null,vaccinationDetails:null};
   }
-  // Define variables
+ 
   show: boolean = true;
   showCoronaDate: any;
   coronaDate: any; 
@@ -66,6 +71,13 @@ export class HMOMembersComponent implements OnInit {
   this.edit=false;
   this.show=false;
   }
+  closeModal() {
+    this.showCoronaDate = false; 
+  }
+
+  closeModalVaccination() {
+    this.showVacHistory = false; 
+  }
 
   editUser(user:Users){
     this.edit=true;
@@ -93,10 +105,10 @@ export class HMOMembersComponent implements OnInit {
   }
 
   removeUser(user: Users) {
-
   this.usersService.deleteUser(user.userId).subscribe(state=>{
       let ind = this.Users.indexOf(user);
       this.Users.splice(ind, 1);
+
   })
   }
 
@@ -135,7 +147,6 @@ export class HMOMembersComponent implements OnInit {
   
   uploadUserPhoto(userId: string, photoData: File): void {
     this.usersService.uploadUserPhoto(userId, photoData).subscribe(response => {
-      // Handle success response if needed
       console.log('good uploading photo:', response);
       this.getUser();
     },
@@ -144,25 +155,32 @@ export class HMOMembersComponent implements OnInit {
     });
   }
 
+  //   getCoronaDate(user: Users) {
+  // this.sickWithCoronaService.getCoronaDate(Number(user.userId)).subscribe((coronaDate: SickWithCorona[]) => {
+  //   this.coronaDate = coronaDate || []; 
+  //   this.showCoronaDate = true;
+  //   this.showVacHistory = false;
+  // });
+  // }
   getCoronaDate(user: Users) {
-  this.sickWithCoronaService.getCoronaDate(Number(user.userId)).subscribe((coronaDate: SickWithCorona[]) => {
-    this.coronaDate = coronaDate || []; 
-    this.showCoronaDate = true;
-  });
+    this.sickWithCoronaService.getCoronaDate(Number(user.userId)).subscribe((coronaDate: SickWithCorona[]) => {
+      const dialogRef = this.dialog.open(MyCoronaDateComponent, {
+        width: '400px', // Set the width of the dialog
+        data: coronaDate || [] // Pass the corona patient data to the dialog
+      });
+    });
   }
-
-  closeModal() {
-    this.showCoronaDate = false; 
-  }
-
-  closeModalVaccination() {
-    this.showVacHistory = false; 
-  }
+  
 
   userVaccination(user:Users) {
   this.VaccinationdetailService.getUserVaccination(Number(user.userId)).subscribe((userVaccination: VaccinationDetail[]) => {
-    this.vaccinationHistory = userVaccination || []; 
-    this.showVacHistory = true;
+    const dialogRef = this.dialog.open(UserVaccinationHistoryComponent, {
+      width: '400px', // Set the width of the dialog
+      data: userVaccination || [] // Pass the corona patient data to the dialog
+    });
+    // this.vaccinationHistory = userVaccination || []; 
+    // this.showVacHistory = true;
+    // this.showCoronaDate = false;
   });
   }
 }
