@@ -1,6 +1,6 @@
 <div class="user-vaccination-card">
     <h2 class="main_word">Vaccination Records</h2>
-    <div *ngFor="let vaccination of vaccinations" class="vaccination-record">
+    <div *ngFor="let vaccination of vaccinationHistory" class="vaccination-record">
       <p class="word"><strong>Vaccination ID:</strong> {{ vaccination.vaccinationId }}</p>
       <p class="word"><strong>User ID:</strong> {{ vaccination.userId }}</p>
       <p class="word"><strong>Vaccine Date:</strong> {{ vaccination.vaccineDate }}</p>

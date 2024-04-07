@@ -172,15 +172,18 @@ export class HMOMembersComponent implements OnInit {
   }
   
 
-  userVaccination(user:Users) {
-  this.VaccinationdetailService.getUserVaccination(Number(user.userId)).subscribe((userVaccination: VaccinationDetail[]) => {
-    const dialogRef = this.dialog.open(UserVaccinationHistoryComponent, {
-      width: '400px', // Set the width of the dialog
-      data: userVaccination || [] // Pass the corona patient data to the dialog
+  userVaccination(user: Users) {
+    this.VaccinationdetailService.getUserVaccination(Number(user.userId)).subscribe((userVaccination: VaccinationDetail[]) => {
+      const dialogRef = this.dialog.open(UserVaccinationHistoryComponent, {
+        width: '400px',
+        data: { vaccinationHistory: userVaccination || [] } // Pass the vaccination history data to the dialog
+      });
+  
+      dialogRef.afterClosed().subscribe((updatedVaccinationHistory: VaccinationDetail[]) => {
+        if (updatedVaccinationHistory) {
+          this.vaccinationHistory = updatedVaccinationHistory;
+        }
+      });
     });
-    // this.vaccinationHistory = userVaccination || []; 
-    // this.showVacHistory = true;
-    // this.showCoronaDate = false;
-  });
   }
 }

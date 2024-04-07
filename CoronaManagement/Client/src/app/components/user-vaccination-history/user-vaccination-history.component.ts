@@ -1,5 +1,6 @@
-import { Component, Input, Output, EventEmitter,Inject } from '@angular/core';
+import { Component, Inject, Input } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { VaccinationDetail } from 'src/models/VaccinationDetail';
 
 @Component({
   selector: 'app-user-vaccination-history',
@@ -7,14 +8,16 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
   styleUrls: ['./user-vaccination-history.component.css']
 })
 export class UserVaccinationHistoryComponent {
+  @Input() vaccinationHistory: VaccinationDetail[];
+
   constructor(
     public dialogRef: MatDialogRef<UserVaccinationHistoryComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any
-  ) { }
-  @Input() vaccinations: any[] = [];
-  @Output() childEvent = new EventEmitter<string>();
+  ) {
+    this.vaccinationHistory = data.vaccinationHistory;
+  }
 
   closeDialog(): void {
-    this.dialogRef.close();
+    this.dialogRef.close(this.vaccinationHistory);
   }
 }
